@@ -64,7 +64,7 @@ class Encodings(object):
 		# print bridgematexpanded.shape
 		bridgemat = bridgematexpanded.reshape(bridgematexpanded.shape[0] / (self.quadBeatNum*4), self.quadBeatNum*4, 3)
 		# print bridgemat.shape
-		self.bridgeMeanColor = np.average(np.sum(bridgemat, axis=1) / (self.quadBeatNum*4), axis=1)
+		self.bridgeMeanColor = np.average(np.sum(bridgemat, axis=1) / (self.quadBeatNum*4), axis=0)
 		# print self.bridgeMeanColor.shape
 
 	def setTempo(self, new_tempo):
@@ -90,8 +90,8 @@ class Encodings(object):
 example = Encodings("images/raspberries.jpg")
 print 
 example.printChorus()
-print 
-example.printBridge()
+#print 
+#example.printBridge()
 
 with open("chorusMeanColor.txt", 'wb') as fp:
 	for item in example.chorusMeanColor.tolist():
