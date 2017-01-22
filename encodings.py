@@ -29,21 +29,21 @@ class Encodings(object):
 		self.quadBeatNum = 208 
 
 		# CHORUS
-		print self.matList[5].shape
+		# print self.matList[5].shape
 		centralmatsub1 = np.concatenate((self.matList[5], self.matList[6]), axis=1)
-		print centralmatsub1.shape
+		# print centralmatsub1.shape
 		centralmatsub2 = np.concatenate((self.matList[9], self.matList[10]), axis=1)
-		print centralmatsub2.shape
+		# print centralmatsub2.shape
 		centralmat = np.concatenate((centralmatsub1, centralmatsub2), axis=0)
-		print centralmat.shape
+		# print centralmat.shape
 		centralmatflatten = np.array([x for a in centralmat for x in a])
-		print centralmatflatten.shape
+		# print centralmatflatten.shape
 		matexpanded = np.concatenate((centralmatflatten, np.zeros((self.quadBeatNum*4*((centralmatflatten.shape[0] / (self.quadBeatNum*4))+1)-centralmatflatten.shape[0], 3), dtype=float)), axis=0)
-		print matexpanded.shape
+		# print matexpanded.shape
 		centralmat = matexpanded.reshape(matexpanded.shape[0] / (self.quadBeatNum*4), self.quadBeatNum*4, 3)
-		print centralmat.shape
+		# print centralmat.shape
 		self.chorusMeanColor = np.sum(centralmat, axis=1) / (self.quadBeatNum*4)
-		print self.chorusMeanColor.shape
+		# print self.chorusMeanColor.shape
 
 		# # VERSES
 		# np.array(self.matList)[[x for x in range(0,16) if x not in [5,6,9,10]]] 
@@ -58,21 +58,21 @@ class Encodings(object):
 		# self.bridgeMeanColor = np.average([topLeftMean, topRightMean, bottomLeftMean, bottomRightMean]) 
 		# print self.bridgeMeanColor
 
-		print self.matList[0].shape
+		# print self.matList[0].shape
 		top = np.concatenate((self.matList[0], self.matList[3]), axis=1)
-		print top.shape
+		# print top.shape
 		bottom = np.concatenate((self.matList[12], self.matList[15]), axis=1)
-		print bottom.shape
+		# print bottom.shape
 		bridgemat = np.concatenate((top, bottom), axis=0)
-		print bridgemat.shape
+		# print bridgemat.shape
 		bridgematflatten = np.array([x for a in bridgemat for x in a])
-		print  bridgematflatten.shape
+		# print  bridgematflatten.shape
 		bridgematexpanded = np.concatenate((bridgematflatten, np.zeros((self.quadBeatNum*4*((bridgematflatten.shape[0] / (self.quadBeatNum*4))+1)-bridgematflatten.shape[0], 3), dtype=float)), axis=0)
-		print bridgematexpanded.shape
+		# print bridgematexpanded.shape
 		bridgemat = bridgematexpanded.reshape(bridgematexpanded.shape[0] / (self.quadBeatNum*4), self.quadBeatNum*4, 3)
-		print bridgemat.shape
+		# print bridgemat.shape
 		self.bridgeMeanColor = np.sum(bridgemat, axis=1) / (self.quadBeatNum*4)
-		print self.bridgeMeanColor.shape
+		# print self.bridgeMeanColor.shape
 
 	def setTempo(self, new_tempo):
 		self.tempo = new_tempo
@@ -84,22 +84,23 @@ class Encodings(object):
 		self.quadBeatNum = newQuadBeatNumL
 
 	def printChorus(self):
-		print self.chorusMeanColor
+		pass
+		# print self.chorusMeanColor
 
 	# def printVerses(self):
 	# 	print self.verseMeanColor
 
 	def printBridge(self):
-		print self.bridgeMeanColor
+		pass
+		# print self.bridgeMeanColor
 
 
 # Test
 example = Encodings("example.jpg")
-
-print 
+# print 
 example.printChorus()
-print 
-example.printBridge()
+# print 
+# example.printBridge()
 
 
 
