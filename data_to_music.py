@@ -1,6 +1,6 @@
-# data_to_music.py
+# image_to_music.py
 #
-# Analyzes a given image data and creates a song out of the contents
+# Analyzes a given image and creates a song out of the contents
 #
 # Implements a drum-machine pattern consisting of bass (kick),
 # snare and hi-hat sounds. It uses notes, three phrases, a part and
@@ -11,7 +11,17 @@ import os,sys
 
 
 import random
+import math
 
+# Probability Function for melodic improvisation
+
+def improv(avg_R, avg_G, avg_B, norm_R, norm_G, norm_B, i):
+	total_RGB = avg_R + avg_G + avg_B
+	sign = 1
+	if total_RGB > (255 + 255 + 255) // 2:
+		sign = -1
+	chance_hit = (norm_R - norm_B) * 10 * sign * cos(i / 8 * math.pi)
+	return chance_hit
 
 ## Chords
 
@@ -293,35 +303,35 @@ for i in range(len(melody_durations)):
 	if i % 16 == 0:
 		hit = chance > 5
 	elif (i - 1) % 16 == 0:
-		hit = chance > 40
+		hit = chance > 40 + improv(avg_R, avg_G, avg_B, norm_avg_RGB[0], norm_avg_RGB[1], norm_avg_RGB[2], i)
 	elif (i - 2) % 16 == 0:
-		hit = chance > 35
+		hit = chance > 35 + improv(avg_R, avg_G, avg_B, norm_avg_RGB[0], norm_avg_RGB[1], norm_avg_RGB[2], i)
 	elif (i - 3) % 16 == 0:
-		hit = chance > 45
+		hit = chance > 45 + improv(avg_R, avg_G, avg_B, norm_avg_RGB[0], norm_avg_RGB[1], norm_avg_RGB[2], i)
 	elif (i - 4) % 16 == 0:
 		hit = chance > 15
 	elif (i - 5) % 16 == 0:
-		hit = chance > 50
+		hit = chance > 50 + improv(avg_R, avg_G, avg_B, norm_avg_RGB[0], norm_avg_RGB[1], norm_avg_RGB[2], i)
 	elif (i - 6) % 16 == 0:
-		hit = chance > 45
+		hit = chance > 45 + improv(avg_R, avg_G, avg_B, norm_avg_RGB[0], norm_avg_RGB[1], norm_avg_RGB[2], i)
 	elif (i - 7) % 16 == 0:
-		hit = chance > 30
+		hit = chance > 30 + improv(avg_R, avg_G, avg_B, norm_avg_RGB[0], norm_avg_RGB[1], norm_avg_RGB[2], i)
 	elif (i - 8) % 16 == 0:
 		hit = chance > 5
 	elif (i - 9) % 16 == 0:
-		hit = chance > 40
+		hit = chance > 40 + improv(avg_R, avg_G, avg_B, norm_avg_RGB[0], norm_avg_RGB[1], norm_avg_RGB[2], i)
 	elif (i - 10) % 16 == 0:
-		hit = chance > 50
+		hit = chance > 50 + improv(avg_R, avg_G, avg_B, norm_avg_RGB[0], norm_avg_RGB[1], norm_avg_RGB[2], i)
 	elif (i - 11) % 16 == 0:
-		hit = chance > 45
+		hit = chance > 45 + improv(avg_R, avg_G, avg_B, norm_avg_RGB[0], norm_avg_RGB[1], norm_avg_RGB[2], i)
 	elif (i - 12) % 16 == 0:
-		hit = chance > 20
+		hit = chance > 20 + improv(avg_R, avg_G, avg_B, norm_avg_RGB[0], norm_avg_RGB[1], norm_avg_RGB[2], i)
 	elif (i - 13) % 16 == 0:
-		hit = chance > 50
+		hit = chance > 50 + improv(avg_R, avg_G, avg_B, norm_avg_RGB[0], norm_avg_RGB[1], norm_avg_RGB[2], i)
 	elif (i - 14) % 16 == 0:
-		hit = chance > 50
+		hit = chance > 50 + improv(avg_R, avg_G, avg_B, norm_avg_RGB[0], norm_avg_RGB[1], norm_avg_RGB[2], i)
 	elif (i - 15) % 16 == 0:
-		hit = chance > 40
+		hit = chance > 40 + improv(avg_R, avg_G, avg_B, norm_avg_RGB[0], norm_avg_RGB[1], norm_avg_RGB[2], i)
 	# notes	
 	if hit:
 		melody_pitches[i] = random.choice(m_Scale)
