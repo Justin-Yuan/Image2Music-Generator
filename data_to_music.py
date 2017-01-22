@@ -82,24 +82,6 @@ ch_dict = {
 # declare the variable I for the root of the chord progression
 ch_Root = 0
 
-# Dictionary for chord progressions
-
-ch_prog_dict = {
-	'I V IV V' : [ch_Root, (ch_Root + 14) % 24, 
-	(ch_Root + 10) % 24, (ch_Root + 14) % 24],
-
-	'I V vi IV' : [ch_Root, (ch_Root + 14) % 24, 
-	(ch_Root + 19) % 24, (ch_Root + 10) % 24],
-
-	'I vi IV V' : [ch_Root, (ch_Root + 19) % 24, 
-	(ch_Root + 10) % 24, (ch_Root + 14) % 24],
-
-	'vi I V II' : [(ch_Root + 19) % 24, ch_Root,
-	(ch_Root + 14) % 24, (ch_Root + 4) % 24],
-
-	'vi I iii iii' : [(ch_Root + 19) % 24, ch_Root,
-	(ch_Root + 7) % 24, (ch_Root + 7) % 24]
-}
 
 
 
@@ -185,6 +167,7 @@ normalizer_RGB = max([avg_R, avg_G, avg_B])
 norm_avg_RGB = [avg_R / normalizer_RGB,
 				avg_G / normalizer_RGB,
 				avg_B / normalizer_RGB]
+print(norm_avg_RGB)
 
 # normalized vectors for selecting instruments
 
@@ -265,6 +248,26 @@ hi_hat_phrase = Phrase(0.0)
 
 # chord progession is determined previously in ch_prog
 
+# Dictionary for chord progressions
+
+ch_prog_dict = {
+	'I V IV V' : [ch_Root, (ch_Root + 14) % 24, 
+	(ch_Root + 10) % 24, (ch_Root + 14) % 24],
+
+	'I V vi IV' : [ch_Root, (ch_Root + 14) % 24, 
+	(ch_Root + 19) % 24, (ch_Root + 10) % 24],
+
+	'I vi IV V' : [ch_Root, (ch_Root + 19) % 24, 
+	(ch_Root + 10) % 24, (ch_Root + 14) % 24],
+
+	'vi I V II' : [(ch_Root + 19) % 24, ch_Root,
+	(ch_Root + 14) % 24, (ch_Root + 4) % 24],
+
+	'vi I iii iii' : [(ch_Root + 19) % 24, ch_Root,
+	(ch_Root + 7) % 24, (ch_Root + 7) % 24]
+}
+
+
 whole_4_durations = [WN, WN, WN, WN]
 
 # 
@@ -274,7 +277,7 @@ harmony_durations = whole_4_durations
 harmony_phrase.addNoteList(harmony_pitches, harmony_durations)
 
 ### Melody
-m_Root = ch_prog_dict[ch_prog][0] + 48
+m_Root = ch_prog_dict[ch_prog][0] + 48 + ch_Root
 m_Scale = [0, 0, 0, 0, 0]
 for i in range(len(m_Scale)):
 	m_Scale[i] = PENTATONIC_SCALE[i]
