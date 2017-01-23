@@ -34,8 +34,8 @@ app.post('/api/photo',function(req,res){
                 console.log(`exec error: ${error}`);
                 return;
             }
-            console.log(`stdout: ${stdout}`);
-            console.log(`stderr: ${stderr}`);
+            // console.log(`stdout: ${stdout}`);
+            // console.log(`stderr: ${stderr}`);
         });
         res.end("File is uploaded");
     });
